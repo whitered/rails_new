@@ -5,7 +5,7 @@
 # ENV['RAILS_ENV'] ||= 'production'
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.1.0' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.1.1' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -40,7 +40,7 @@ Rails::Initializer.run do |config|
 
   # Make Time.zone default to the specified zone, and make Active Record store time values
   # in the database in UTC, and return them converted to the specified local zone.
-  # Run "rake -D time" for a list of tasks for finding time zone names. Uncomment to use default local time.
+  # Run "rake -D time" for a list of tasks for finding time zone names. Comment line to use default local time.
   config.time_zone = 'UTC'
 
   # Your secret key for verifying cookie session data integrity.
@@ -49,7 +49,7 @@ Rails::Initializer.run do |config|
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
     :session_key => '_rails_new_session',
-    :secret      => 'fc85828ed3f2bd4b99e7e9e0eee09d6165d718da4307efb9bb58b35be58c4c207c300e5f6feaf50fd8cbd55961366737ab43c18a693df19cdbd5c65548c24562'
+    :secret      => 'd94f926464f6aa629797a83970071c748bd42f293b749781ff18575bf71899c3f33121a2b9a6fdeb427924d7c266fc2e4295dc87c19833a1659e57d3e848ce2b'
   }
 
   # Use the database for sessions instead of the cookie-based default,
