@@ -1,4 +1,4 @@
-#!/usr/local/bin/ruby
+#!/home/whitered/.rvm/rubies/ruby-1.8.7-p334/bin/ruby
 require 'rubygems'
 require_gem 'rails'
 require 'breakpoint_client'

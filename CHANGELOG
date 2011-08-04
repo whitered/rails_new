@@ -1,3 +1,24 @@
+*0.9.5* (January 25th, 2005)
+
+* Fixed dependency reloading by switching to a remove_const approach where all Active Records, Active Record Observers, and Action Controllers are reloading by undefining their classes. This enables you to remove methods in all three types and see the change reflected immediately and it fixes #539. This also means that only those three types of classes will benefit from the const_missing and reloading approach. If you want other classes (like some in lib/) to reload, you must use require_dependency to do it.
+
+* Added Florian Gross' latest version of Breakpointer and friends that fixes a variaty of bugs #441 [Florian Gross]
+
+* Fixed skeleton Rakefile to work with sqlite3 out of the box #521 [rasputnik]
+
+* Fixed that script/breakpointer didn't get the Ruby path rewritten as the other scripts #523 [brandt@kurowski.net]
+
+* Fixed handling of syntax errors in models that had already been succesfully required once in the current interpreter
+
+* Fixed that models that weren't referenced in associations weren't being reloaded in the development mode by reinstating the reload
+
+* Fixed that generate scaffold would produce bad functional tests
+
+* Fixed that FCGI can also display SyntaxErrors
+
+* Upgraded to Active Record 1.6.0, Action Pack 1.4.0
+
+
 *0.9.4.1* (January 18th, 2005)
 
 * Added 5-second timeout to WordNet alternatives on creating reserved-word models #501 [Marcel Molina]
