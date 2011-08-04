@@ -71,6 +71,7 @@ Rake::RDocTask.new("appdoc") { |rdoc|
 desc "Generate documentation for the Rails framework"
 Rake::RDocTask.new("apidoc") { |rdoc|
   rdoc.rdoc_dir = 'doc/api'
+  rdoc.template = "#{ENV['template']}.rb" if ENV['template']
   rdoc.title    = "Rails Framework Documentation"
   rdoc.options << '--line-numbers --inline-source'
   rdoc.rdoc_files.include('README')
@@ -89,9 +90,17 @@ Rake::RDocTask.new("apidoc") { |rdoc|
   rdoc.rdoc_files.include('vendor/rails/actionmailer/CHANGELOG')
   rdoc.rdoc_files.include('vendor/rails/actionmailer/lib/action_mailer/base.rb')
   rdoc.rdoc_files.include('vendor/rails/actionwebservice/README')
-  rdoc.rdoc_files.include('vendor/rails/actionwebservice/ChangeLog')
-  rdoc.rdoc_files.include('vendor/rails/actionwebservice/lib/action_web_service/**/*.rb')
+  rdoc.rdoc_files.include('vendor/rails/actionwebservice/CHANGELOG')
+  rdoc.rdoc_files.include('vendor/rails/actionwebservice/lib/action_web_service.rb')
+  rdoc.rdoc_files.include('vendor/rails/actionwebservice/lib/action_web_service/*.rb')
+  rdoc.rdoc_files.include('vendor/rails/actionwebservice/lib/action_web_service/api/*.rb')
+  rdoc.rdoc_files.include('vendor/rails/actionwebservice/lib/action_web_service/client/*.rb')
+  rdoc.rdoc_files.include('vendor/rails/actionwebservice/lib/action_web_service/container/*.rb')
+  rdoc.rdoc_files.include('vendor/rails/actionwebservice/lib/action_web_service/dispatcher/*.rb')
+  rdoc.rdoc_files.include('vendor/rails/actionwebservice/lib/action_web_service/protocol/*.rb')
+  rdoc.rdoc_files.include('vendor/rails/actionwebservice/lib/action_web_service/support/*.rb')
   rdoc.rdoc_files.include('vendor/rails/activesupport/README')
+  rdoc.rdoc_files.include('vendor/rails/activesupport/CHANGELOG')
   rdoc.rdoc_files.include('vendor/rails/activesupport/lib/active_support/**/*.rb')
 }
 
