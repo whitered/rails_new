@@ -1,23 +1,23 @@
 development:
   adapter: mysql
-  database: rails_development
-  host: localhost
+  database: rails_new_development
+  socket: /path/to/your/mysql.sock
   username: root
-  password: 
-
+  password:
+  
 # Warning: The database defined as 'test' will be erased and
 # re-generated from your development database when you run 'rake'.
 # Do not set this db to the same as development or production.
 test:
   adapter: mysql
-  database: rails_test
-  host: localhost
+  database: rails_new_test
+  socket: /path/to/your/mysql.sock
   username: root
   password:
 
 production:
   adapter: mysql
-  database: rails_production
-  host: localhost
+  database: rails_new_production
+  socket: /path/to/your/mysql.sock
   username: root
   password: 
