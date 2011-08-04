@@ -12,6 +12,38 @@ RewriteBase /dispatch.cgi
 # Enable this rewrite rule to point to the controller/action that should serve root.
 # RewriteRule ^$ /controller/action [R]
 
+# <caching>
+# no query string?
+RewriteCond %{QUERY_STRING} ^$
+
+# no POST method? 
+RewriteCond %{REQUEST_METHOD} !^POST$ [NC]
+
+# Request filename is a directory?
+RewriteCond %{REQUEST_FILENAME} -d
+
+# Request filename + '/index' is a file?
+RewriteCond %{REQUEST_FILENAME}/index -f
+
+# Rewrite to request filename + '/index' and finish
+RewriteRule ^(.*)/?$ $1/index [QSA,L]
+
+# no query string?
+RewriteCond %{QUERY_STRING} ^$
+
+# no POST method?
+RewriteCond %{REQUEST_METHOD} !^POST$ [NC]
+
+# Request filename is a file?
+RewriteCond %{REQUEST_FILENAME} -f
+
+# Finish rewriting
+RewriteRule .* - [L]
+
+# Set default type of cached files to text/html
+DefaultType text/html
+# </caching>
+
 # Add missing slash
 RewriteRule ^([-_a-zA-Z0-9]+)$                                            /$1/ [R]
 
