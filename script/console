@@ -1,4 +1,4 @@
-#!/usr/local/bin/ruby
+#!/home/whitered/.rvm/rubies/ruby-1.8.7-p334/bin/ruby
 
 if ARGV[0]
   ENV['RAILS_ENV'] = ARGV[0]
