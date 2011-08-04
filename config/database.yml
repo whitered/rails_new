@@ -1,6 +1,6 @@
-production:
+development:
   adapter: mysql
-  database: rails_production
+  database: rails_development
   host: localhost
   username: root
   password: 
@@ -11,3 +11,10 @@ test:
   host: localhost
   username: root
   password:
+
+production:
+  adapter: mysql
+  database: rails_production
+  host: localhost
+  username: root
+  password: 
