@@ -1,13 +1,15 @@
 # Be sure to restart your web server when you modify this file.
 
-# Uncomment below to force Rails into production mode
-# (Use only when you can't set environment variables through your web/app server)
+# Uncomment below to force Rails into production mode when 
+# you don't control web/app server and can't set it the proper way
 # ENV['RAILS_ENV'] ||= 'production'
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
+  # Settings in config/environments/* take precedence those specified here
+  
   # Skip frameworks you're not going to use
   # config.frameworks -= [ :action_web_service, :action_mailer ]
 
