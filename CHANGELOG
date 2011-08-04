@@ -1,3 +1,49 @@
+*0.10.0* (24th February, 2005)
+
+* Changed default IP binding for WEBrick from 127.0.0.1 to 0.0.0.0 so that the server is accessible both locally and remotely #696 [Marcel]
+
+* Fixed that script/server -d was broken so daemon mode couldn't be used #687 [Nicholas Seckar]
+
+* Upgraded to breakpoint 92 which fixes:
+
+    * overload IRB.parse_opts(), fixes #443
+      => breakpoints in tests work even when running them via rake
+    * untaint handlers, might fix an issue discussed on the Rails ML
+    * added verbose mode to breakpoint_client
+    * less noise caused by breakpoint_client by default
+    * ignored TerminateLineInput exception in signal handler
+      => quiet exit on Ctrl-C
+
+* Added support for independent components residing in /components. Example:
+
+    Controller: components/list/items_controller.rb
+    (holds a List::ItemsController class with uses_component_template_root called)
+    
+    Model     : components/list/item.rb
+    (namespace is still shared, so an Item model in app/models will take precedence)
+    
+    Views     : components/list/items/show.rhtml
+
+
+* Added --sandbox option to script/console that'll roll back all changes made to the database when you quit #672 [bitsweat]
+
+* Added 'recent' as a rake target that'll run tests for files that changed in the last 10 minutes #612 [bitsweat]
+
+* Changed script/console to default to development environment and drop --no-inspect #650 [bitsweat]
+
+* Added that the 'fixture :posts' syntax can be used for has_and_belongs_to_many fixtures where a model doesn't exist #572 [bitsweat]
+
+* Added that running test_units and test_functional now performs the clone_structure_to_test as well #566 [rasputnik]
+
+* Added new generator framework that informs about its doings on generation and enables updating and destruction of generated artifacts. See the new script/destroy and script/update for more details #487 [bitsweat]
+
+* Added Action Web Service as a new add-on framework for Action Pack [Leon Bredt]
+
+* Added Active Support as an independent utility and standard library extension bundle
+
+* Upgraded to Active Record 1.7.0, Action Pack 1.5.0, Action Mailer 0.7.0
+
+
 *0.9.5* (January 25th, 2005)
 
 * Fixed dependency reloading by switching to a remove_const approach where all Active Records, Active Record Observers, and Action Controllers are reloading by undefining their classes. This enables you to remove methods in all three types and see the change reflected immediately and it fixes #539. This also means that only those three types of classes will benefit from the const_missing and reloading approach. If you want other classes (like some in lib/) to reload, you must use require_dependency to do it.
