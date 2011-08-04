@@ -183,7 +183,7 @@
     <script type="text/javascript">
       function about() {
         if (Element.empty('about-content')) {
-          new Ajax.Updater('about-content', 'rails_info/properties', {
+          new Ajax.Updater('about-content', 'rails/info/properties', {
             method:     'get',
             onFailure:  function() {Element.classNames('about-content').add('failure')},
             onComplete: function() {new Effect.BlindDown('about-content', {duration: 0.25})}
@@ -230,8 +230,8 @@
             <h3>Browse the documentation</h3>
             <ul class="links">
               <li><a href="http://api.rubyonrails.org/">Rails API</a></li>
-              <li><a href="http://www.ruby-doc.org/stdlib/">Ruby standard library</a></li>
-              <li><a href="http://www.ruby-doc.org/core/">Ruby core</a></li>
+              <li><a href="http://stdlib.rubyonrails.org/">Ruby standard library</a></li>
+              <li><a href="http://corelib.rubyonrails.org/">Ruby core</a></li>
             </ul>
           </li>
         </ul>
@@ -239,12 +239,12 @@
 
       <div id="content">
         <div id="header">
-          <h1>Welcome aboard</h2>
+          <h1>Welcome aboard</h1>
           <h2>You&rsquo;re riding the Rails!</h2>
         </div>
 
         <div id="about">
-          <h3><a href="rails_info/properties" onclick="about(); return false">About your application&rsquo;s environment</a></h3>
+          <h3><a href="rails/info/properties" onclick="about(); return false">About your application&rsquo;s environment</a></h3>
           <div id="about-content" style="display: none"></div>
         </div>
         
