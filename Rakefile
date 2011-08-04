@@ -75,7 +75,6 @@ Rake::RDocTask.new("apidoc") { |rdoc|
   rdoc.options << '--line-numbers --inline-source'
   rdoc.rdoc_files.include('README')
   rdoc.rdoc_files.include('CHANGELOG')
-  rdoc.rdoc_files.include('vendor/railties/lib/breakpoint.rb')
   rdoc.rdoc_files.include('vendor/railties/CHANGELOG')
   rdoc.rdoc_files.include('vendor/railties/MIT-LICENSE')
   rdoc.rdoc_files.include('vendor/activerecord/README')
@@ -89,14 +88,21 @@ Rake::RDocTask.new("apidoc") { |rdoc|
   rdoc.rdoc_files.include('vendor/actionmailer/README')
   rdoc.rdoc_files.include('vendor/actionmailer/CHANGELOG')
   rdoc.rdoc_files.include('vendor/actionmailer/lib/action_mailer/base.rb')
+  rdoc.rdoc_files.include('vendor/actionwebservice/README')
+  rdoc.rdoc_files.include('vendor/actionwebservice/ChangeLog')
+  rdoc.rdoc_files.include('vendor/actionwebservice/lib/action_web_service/**/*.rb')
+  rdoc.rdoc_files.include('vendor/activesupport/README')
+  rdoc.rdoc_files.include('vendor/activesupport/lib/active_support/**/*.rb')
 }
 
 desc "Report code statistics (KLOCs, etc) from the application"
-task :stats do
+task :stats => [ :environment ] do
   require 'code_statistics'
   CodeStatistics.new(
     ["Helpers", "app/helpers"], 
     ["Controllers", "app/controllers"], 
+    ["APIs", "app/apis"],
+    ["Components", "components"],
     ["Functionals", "test/functional"],
     ["Models", "app/models"],
     ["Units", "test/unit"]
@@ -114,7 +120,7 @@ task :clone_structure_to_test => [ :db_structure_dump, :purge_test_database ] do
         ActiveRecord::Base.connection.execute(table)
       end
     when  "postgresql"
-      `psql -U #{abcs["test"]["username"]} -f db/#{RAILS_ENV}_structure.sql #{abcs["test"]["database"]}`
+      `psql -U #{abcs["test"]["username"]} -h #{abcs["test"]["host"]} -f db/#{RAILS_ENV}_structure.sql #{abcs["test"]["database"]}`
     when "sqlite", "sqlite3"
       `#{abcs[RAILS_ENV]["adapter"]} #{abcs["test"]["dbfile"]} < db/#{RAILS_ENV}_structure.sql`
     else 
@@ -130,7 +136,7 @@ task :db_structure_dump => :environment do
       ActiveRecord::Base.establish_connection(abcs[RAILS_ENV])
       File.open("db/#{RAILS_ENV}_structure.sql", "w+") { |f| f << ActiveRecord::Base.connection.structure_dump }
     when  "postgresql"
-      `pg_dump -U #{abcs[RAILS_ENV]["username"]} -s -f db/#{RAILS_ENV}_structure.sql #{abcs[RAILS_ENV]["database"]}`
+      `pg_dump -U #{abcs[RAILS_ENV]["username"]} -h #{abcs[RAILS_ENV]["host"]} -s -f db/#{RAILS_ENV}_structure.sql #{abcs[RAILS_ENV]["database"]}`
     when "sqlite", "sqlite3"
       `#{abcs[RAILS_ENV]["adapter"]} #{abcs[RAILS_ENV]["dbfile"]} .schema > db/#{RAILS_ENV}_structure.sql`
     else 
@@ -146,8 +152,8 @@ task :purge_test_database => :environment do
       ActiveRecord::Base.establish_connection(abcs[RAILS_ENV])
       ActiveRecord::Base.connection.recreate_database(abcs["test"]["database"])
     when "postgresql"
-      `dropdb -U #{abcs["test"]["username"]} #{abcs["test"]["database"]}`
-      `createdb -U #{abcs["test"]["username"]}  #{abcs["test"]["database"]}`
+      `dropdb -U #{abcs["test"]["username"]} -h #{abcs["test"]["host"]} #{abcs["test"]["database"]}`
+      `createdb -U #{abcs["test"]["username"]} -h #{abcs["test"]["host"]} #{abcs["test"]["database"]}`
     when "sqlite","sqlite3"
       File.delete(abcs["test"]["dbfile"]) if File.exist?(abcs["test"]["dbfile"])
     else 

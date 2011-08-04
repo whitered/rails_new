@@ -1,3 +1,38 @@
+*0.10.1* (7th March, 2005)
+
+* Fixed rake stats to ignore editor backup files like model.rb~ #791 [skanthak]
+
+* Added exception shallowing if the DRb server can't be started (not worth making a fuss about to distract new users) #779 [Tobias Luetke]
+
+* Added an empty favicon.ico file to the public directory of new applications (so the logs are not spammed by its absence)
+
+* Fixed that scaffold generator new template should use local variable instead of instance variable #778 [Dan Peterson]
+
+* Allow unit tests to run on a remote server for PostgreSQL #781 [adamm@galacticasoftware.com]
+
+* Added web_service generator (run ./script/generate web_service for help) #776 [Leon Bredt]
+
+* Added app/apis and components to code statistics report #729 [Scott Barron]
+
+* Fixed WEBrick server to use ABSOLUTE_RAILS_ROOT instead of working_directory #687 [Nicholas Seckar]
+
+* Fixed rails_generator to be usable without RubyGems #686 [Cristi BALAN]
+
+* Fixed -h/--help for generate and destroy generators #331
+
+* Added begin/rescue around the FCGI dispatcher so no uncaught exceptions can bubble up to kill the process (logs to log/fastcgi.crash.log)
+
+* Fixed that association#count would produce invalid sql when called sequentialy #659 [kanis@comcard.de]
+
+* Fixed test/mocks/testing to the correct test/mocks/test #740
+
+* Added early failure if the Ruby version isn't 1.8.2 or above #735
+
+* Removed the obsolete -i/--index option from the WEBrick servlet #743
+
+* Upgraded to Active Record 1.8.0, Action Pack 1.5.1, Action Mailer 0.7.1, Action Web Service 0.6.0, Active Support 1.0.1
+
+
 *0.10.0* (24th February, 2005)
 
 * Changed default IP binding for WEBrick from 127.0.0.1 to 0.0.0.0 so that the server is accessible both locally and remotely #696 [Marcel]
